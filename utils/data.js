@@ -179,3 +179,21 @@ const addDateSuffix = (date) => {
     'weird',
     'gnarly dude'
   ]
+
+  const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const getRandomName = () =>
+  `${getRandomArrItem(names)}`;
+
+const getRandomReactions = (x) => {
+    const results = [];
+    for (let i = 0; i < x; i++) {
+      results.push({
+        reactionBody: getRandomArrItem(reactionExamples),
+        username: 'somebody123'
+      });
+    }
+    return results;
+  };
+
+  module.exports = { getRandomReactions, getRandomName }
