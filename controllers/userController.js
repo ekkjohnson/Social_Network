@@ -1,8 +1,8 @@
 const { ObjectId } = require("mongoose").Types;
-const { User } = require('../models')
+const { user } = require('../models')
 
 const friendCount = async () => 
-    User.aggregate([
+    user.aggregate([
         { "$project": {
             "Count": { 
                 "$size": { "$ifNull": [ "$friends", [] ] }
@@ -14,7 +14,7 @@ const friendCount = async () =>
 module.exports = {
   // get all users
   getUsers(req, res) {
-    User.find()
+    user.find()
         .then(async (users) => {
             const userObj = {
                 users,
@@ -29,7 +29,7 @@ module.exports = {
         })
   },
   getSingleUser(req, res) {
-      User.findOne({ _id: req.params.userId })
+      user.findOne({ _id: req.params.userId })
       .then( async (user) => 
         !user
             ? res.status(404).json({ message: 'No user found with that ID'})
