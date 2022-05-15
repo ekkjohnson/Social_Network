@@ -7,4 +7,4 @@ connect(connectionString,{
     useUnifiedTopology: true,   
 })
 
-model.exports=connection;
+module.exports=connection;
