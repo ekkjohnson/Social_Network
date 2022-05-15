@@ -1,5 +1,5 @@
 const connection = require("../config/connection");
-const { User, Thought } = require("../models");
+const { user, thought } = require("../models");
 const { getRandomReactions, getRandomName } = require('./data')
 
 
@@ -9,13 +9,13 @@ connection.on("error", (err) => err);
 connection.once("open", async () => {
   console.log("connected");
 
-  await User.deleteMany({});
+  await user.deleteMany({});
 
-  await Thought.deleteMany({});
+  await thought.deleteMany({});
 
-  await Thought.collection.insertOne({
+  await thought.collection.insertOne({
     thoughtText: "something",
-    username: "BretBanger",
+    username: "ekkjohnson",
     reactions: getRandomReactions(5)
   });
 
@@ -32,7 +32,7 @@ connection.once("open", async () => {
     });
   }
 
-  await User.collection.insertMany(users);
+  await user.collection.insertMany(users);
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });
