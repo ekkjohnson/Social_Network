@@ -41,4 +41,4 @@ module.exports = {
   }
 };
 
-module.exports = userController;
+// module.exports = userController;
