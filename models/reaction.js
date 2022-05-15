@@ -19,18 +19,18 @@ const reactionSchema = new Schema(
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal),
       },
     },
     {
       toJSON: {
         getters: true,
       },
+      id: false,
     }
   );
 
-  thoughtSchema.virtual("reactionCount").get(function () {
-    return this.reactions.length;
-  });
+//   thoughtSchema.virtual("reactionCount").get(function () {
+//     return this.reactions.length;
+//   });
   
   module.exports=reaction;

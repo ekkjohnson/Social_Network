@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+// const { isEmail } = require("validator");
 const userSchema = new Schema(
   {
     username: {
@@ -33,15 +33,14 @@ const userSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      getters: true,
     },
     id: false,
   }
 );
 
-userSchema.virtual("friendCount").get(function () {
-    return this.friends.length;
-  });
+// userSchema.virtual("friendCount").get(function () {
+//     return this.friends.length;
+//   });
   
 const user = model("user", userSchema);
 
