@@ -33,4 +33,4 @@ const reactionSchema = new Schema(
 //     return this.reactions.length;
 //   });
   
-  module.exports=reaction;
+  module.exports=reactionSchema;
