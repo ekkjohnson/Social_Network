@@ -12,7 +12,7 @@ module.exports = {
       });
   },
   getThought(req, res) {
-    Thought.findOne({ _id: req.params.thoughtId })
+    thought.findOne({ _id: req.params.thoughtId })
       .then( async (thought) => 
         !thought
             ? res.status(404).json({ message: 'No thought with that ID'})
@@ -20,7 +20,7 @@ module.exports = {
       )
   },
   addThought(req, res) {
-    Thought.create(req.body)
+    thought.create(req.body)
     .then((thought) => 
     User.findOneAndUpdate(
       { _id: req.body.userId },
@@ -31,7 +31,7 @@ module.exports = {
     .catch((err) => res.status(500).json(err))
   },
   updateThought(req, res) {
-    Thought.findOneAndUpdate(
+    thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
       { runValidators: true, new: true }
@@ -45,7 +45,7 @@ module.exports = {
 
   },
   deleteThought(req, res) {
-    Thought.findOneAndDelete({ _id: req.params.thoughtId})
+    thought.findOneAndDelete({ _id: req.params.thoughtId})
       .then((thought) =>
       !thought
         ? res.status(404).json({ message: 'No thought has that ID.'})
@@ -59,7 +59,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   addReaction(req, res) {
-    Thought.findOneAndUpdate(
+    thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body } },
       { new: true }
@@ -72,7 +72,7 @@ module.exports = {
   .catch((err) => res.status(500).json(err));
   },
   deleteReaction(req, res) {
-    Thought.findOneAndUpdate(
+    thought.findOneAndUpdate(
       { _id: req.params.thoughtId},
       { $pull: { reactions: { _id: req.params.reactionId }}},
       { new: true},
