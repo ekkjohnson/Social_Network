@@ -40,12 +40,12 @@ module.exports = {
       )
   },
   addUser(req, res) {
-    User.create(req.body)
+    user.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err))
 },
 updateUser(req, res) {
-    User.findOneAndUpdate(
+    user.findOneAndUpdate(
         { _id: ObjectId(req.params.userId) },
         { $set: req.body },
         { runValidators: true, new: true }
@@ -59,7 +59,7 @@ updateUser(req, res) {
 
 },
 deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userId})
+    user.findOneAndDelete({ _id: req.params.userId})
     .then((user) =>
     !user
       ? res.status(404).json({ message: 'No user has that ID.'})
@@ -69,7 +69,7 @@ deleteUser(req, res) {
 
 },
 addFriend(req, res) {  
-  User.findOne({ _id: req.params.friendId})
+  user.findOne({ _id: req.params.friendId})
       .then((friend) => 
       !friend
           ? res.status(404).json({ message: 'No user has that ID.' })
@@ -80,7 +80,20 @@ addFriend(req, res) {
       ))
       .then((user) => res.json({ message: 'friend added!' }))
       .catch((err) => res.status(500).json(err));
-}
+},
+removeFriend(req, res) {
+    user.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user has that ID." })
+          : res.json({ message: "friend removed!" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
 
 // module.exports = userController;
