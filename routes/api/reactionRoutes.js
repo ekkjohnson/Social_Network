@@ -8,8 +8,8 @@ const{
 
 // router.route('/').get(getAllReactions);
 //directs to thoughtid reactions post
-router.route('/:thoughtId/reactions').post(addReaction);
+router.route('/:thoughtId/reaction').post(addReaction);
 //directs to delte thought id reactions
-router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction);
+router.route('/:thoughtId/reaction/:reactionId').delete(deleteReaction);
 
 module.exports=router;

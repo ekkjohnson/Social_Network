@@ -1,7 +1,7 @@
 const { thought } = require("../models");
 
 module.exports = {
-  //get all thoughts
+  //get all the thoughts
   getThoughts(req, res) {
     thought.find()
       .then((thoughts) => {
