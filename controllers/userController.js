@@ -73,7 +73,7 @@ addFriend(req, res) {
       .then((friend) => 
       !friend
           ? res.status(404).json({ message: 'No user has that ID.' })
-          :User.findOneAndUpdate(
+          :user.findOneAndUpdate(
           { _id: req.params.userId},
           { $addToSet: { friends: friend }},
           { runValidators: true, new: true }
